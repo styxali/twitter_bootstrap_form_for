@@ -104,9 +104,11 @@ class TwitterBootstrapFormFor::FormBuilder < ActionView::Helpers::FormBuilder
 
   TOGGLES.each do |toggle|
     define_method toggle do |attribute, *args, &block|
+      options     = args.extract_options!
       label       = args.first.nil? ? '' : args.shift
       target      = self.object_name.to_s + '_' + attribute.to_s
-      label_attrs = toggle == :check_box ? { :for => target, :class => 'checkbox' } : { :class => 'radio' }
+      inline      = options.delete(:inline) ? ' inline' : ''
+      label_attrs = toggle == :check_box ? { :for => target, :class => 'checkbox' + inline } : { :class => 'radio' + inline }
 
       template.content_tag(:spn) do
         template.concat template.content_tag(:label, label_attrs) {
