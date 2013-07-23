@@ -38,10 +38,10 @@ class TwitterBootstrapFormFor::FormBuilder < ActionView::Helpers::FormBuilder
   # and the appropriate markup. All toggle buttons should be rendered
   # inside of here, and will not look correct unless they are.
   #
-  def toggles(label = nil, &block)
+  def toggles(label = nil, options = {}, &block)
     template.content_tag(:div, :class => 'control-group') do
       template.concat template.content_tag(:label, label, :class => 'control-label')
-      template.concat template.content_tag(:div, :class => "controls") {
+      template.concat template.content_tag(:div, :class => "controls #{options[:class]}") {
         block.call
       }
     end
